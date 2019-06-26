@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+<div class="gifs container">
+    <div class="row">
+        <div th:each="toy : ${toys}" class="col s6 14">
+            <a th:href="@{'toy/' + ${toy.name}}">
+                <img th:src="@{'/toys/' + ${toy.name} + '.jpg'}">
+
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
