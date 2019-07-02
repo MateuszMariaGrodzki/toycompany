@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:href="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Toy company</title>
     <link rel="stylesheet" th:href="@{/cascade/starter-template.css}" />
 </head>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -28,14 +29,15 @@
 </nav>
 
 <div class="container">
+           <div class="toys container">
+            <div class="row">
+                <div th:each="category : ${categories}" class="col s6 14">
+                    <h1 th:text = "${category}"></h1>
+                    <a th:href="@{'/category/' + ${category}}" th:text="${category}">Category Name</a>
 
-    <div class="starter-template">
-        <h1>Toy company</h1>
-        <h2>Owner : Mateusz Grodzki</h2>
-        <h2>Adres: ####</h2>
-        <h2>Phone number: ###-###-###</h2>
-        <h2>Email: #@gmail.com </h2>
-    </div>
+                </div>
+            </div>
+        </div>
 
 
 </div><!-- /.container -->
@@ -50,4 +52,10 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
+
+
 </html>
+<!--
+<a th:href="@{'toy/' + ${toy.name}}">
+    <img th:src="@{'/toys/' + ${toy.name} + '.jpg'}">
+-->

@@ -1,7 +1,7 @@
 package com.toycompany.demo.Controller;
 
+import com.toycompany.demo.Model.Repository.CategoryRepository;
 import com.toycompany.demo.Model.Repository.ToyRepository;
-import com.toycompany.demo.Model.Toy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +15,9 @@ public class ToyController {
     @Autowired
     ToyRepository toyRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
     @RequestMapping("/home")
     public String home() {
         return "home";
@@ -22,17 +25,11 @@ public class ToyController {
 
     @RequestMapping("/toys")
     public String displayToys(ModelMap map){
-        List<Toy> toys = toyRepository.getAllToys();
-        map.put("toys" , toys);
-        return "toys";
+        List<String> categories = categoryRepository.getCategoryNames();
+        map.put("categories" , categories);
+        return "categories";
     }
 
-    @RequestMapping("/toy/{name}")
-    @ResponseBody
-    public String displayToy(@PathVariable String name){
-        String result = toyRepository.getContentByName(name);
-        return result;
-    }
 
     @RequestMapping("/contact")
     public String displayOwnerInformation(){
