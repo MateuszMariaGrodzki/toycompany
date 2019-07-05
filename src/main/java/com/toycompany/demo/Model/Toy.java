@@ -1,5 +1,8 @@
 package com.toycompany.demo.Model;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Toy {
 
     private String name;
@@ -14,6 +17,8 @@ public class Toy {
         this.categoryId = categoryId;
 
     }
+
+    public Toy(){}
 
     public String getName() {
         return name;
