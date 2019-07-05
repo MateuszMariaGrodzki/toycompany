@@ -36,7 +36,7 @@
 <div class="container">
     <div th:each = "toy : ${toys}" lass="col s6 14">
         <a th:href="@{'toy/' + ${toy.name}}">
-            <img th:src="@{'/toys/' + ${toy.name} + '.jpg'}">
+            <img width="250" height="250" th:src="@{'/toys/' + ${toy.name} + '.jpg'}">
 
     </div>
 </div><!-- /.container -->

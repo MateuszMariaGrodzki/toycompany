@@ -34,8 +34,9 @@
 </nav>
 
 <div class="container">
-    <img th:src="@{'/toys/' + ${toy.name} + '.jpg'}">
+    <img width="300" height="300" th:src="@{'/toys/' + ${toy.name} + '.jpg'}">
     <p th:text="${toy.content}"></p>
+    <p th:text="'Cena wypożyczenia za godzine: ' + ${toy.pricePerHour}"></p>
 
     </div>
 </div><!-- /.container -->

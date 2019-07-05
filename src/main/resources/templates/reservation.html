@@ -34,12 +34,21 @@
 </nav>
 
 <div class="container">
-
-    <div class="starter-template">
-    <h2>aaa</h2>
-        <h1>Strona firmy zajmujacej sie wypożyczaniem dmuchańców na imprezy grupowe.</h1>
+    <h2>aa</h2>
+    <h1>Podstawowe informacje dotyczace rezerwacji:</h1>
+    <h3>Rezerwacje możliwe są tylko na weekendy w okresie wakacyjnym tj: miesiace od czerwca do sierpnia włącznie.</h3>
+    <h3>Rezerwacja zaczyna się od wprowadzenia daty w okienko poniżej. Nastepnie system sprawdzi czy podany termin jest dostępny.</h3>
+    <h3>Datę prosze wprowadzać według schematu: dd/mm/rrrr np: 06/07/2016</h3>
+    <form th:object="${date}" th:action="@{/reservation/check}" th:method="post">
+        <div class="form-group">
+            <label>Podaj datę w powyższym formacie</label>
+            <input required type="text" name = "date"
+                   class="form-control input-small"
+                   placeholder="Content">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg ">Sprawdź dostępność</button>
+    </form>
     </div>
-
 </div><!-- /.container -->
 
 
