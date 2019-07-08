@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Toy company</title>
-    <link rel="stylesheet" th:href="@{/cascade/starter-template.css}" />
-</head>
+    <link rel="stylesheet" href="@{/cascade/starter-template.css}" />
+    </head>
 
 
 <body>
@@ -44,10 +44,11 @@
             <label>Podaj datę w powyższym formacie</label>
             <input required type="text" name = "date"
                    class="form-control input-small"
-                   placeholder="Content">
+                   placeholder="Data">
         </div>
         <button type="submit" class="btn btn-primary btn-lg ">Sprawdź dostępność</button>
     </form>
+    <h1 th:text = "${message}" style = "font-size:500%;color:red"></h1>
     </div>
 </div><!-- /.container -->
 

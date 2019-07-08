@@ -20,6 +20,14 @@ public class ToyRepository {
 
     public List<Toy> getAllToys() { return  TOYS;}
 
+    public List<String> getToysNames() {
+        List<String> result = new ArrayList<>();
+        for (Toy toy : TOYS) {
+            result.add(toy.getName());
+        }
+        return result;
+    }
+
     public String getContentByName(String name) {
         for (Toy toy: TOYS) {
             if(toy.getName().equals(name)) {

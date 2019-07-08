@@ -3,13 +3,16 @@ package com.toycompany.demo.Controller;
 import com.toycompany.demo.Model.Client;
 import com.toycompany.demo.Model.Repository.ClientRepository;
 import com.toycompany.demo.Model.Repository.ClientService;
+import com.toycompany.demo.Model.Repository.ToyRepository;
 import com.toycompany.demo.Model.Toy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/reservation")
 public class ClientController {
+    private String date = "";
 
     @Autowired
     ClientRepository clientRepository;
@@ -24,8 +28,12 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
+    @Autowired
+    ToyRepository toyRepository;
+
     @RequestMapping("")
-    public String beginReservation(){
+    public String beginReservation(ModelMap modelMap, @RequestParam String message){
+        modelMap.put("message" , message);
         return "reservation";
     }
 
@@ -45,12 +53,49 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)
-    @ResponseBody
-    public String test(@RequestParam("date") String date){
-        boolean inDatabase = isDateInDatabase(date);
-        boolean isCorrect = isDateCorrect(date);
-        return inDatabase && isCorrect ? "nie" : "tak";
+    public String testDate(@RequestParam("date") String date , RedirectAttributes redirectAttributes){
+        if(! isDateCorrect(date)) {
+            redirectAttributes.addAttribute("message" , "Niepoprawna data");
+            return "redirect:/reservation";
+        }
+
+        if(isDateInDatabase(date)) {
+            redirectAttributes.addAttribute("message" , "Termin został już zarezerwowany przez inną osobę");
+            return "redirect:/reservation";
+        }
+        this.date = date;
+        return "redirect:/reservation/user";
     }
+
+    @RequestMapping(value = "/user" , method = RequestMethod.GET)
+    public String UserData(ModelMap modelMap){
+        List<String> toyNames = toyRepository.getToysNames();
+        modelMap.put("toys" , toyNames);
+        return "userform";
+    }
+
+    @RequestMapping(value = "/useradd" , method = RequestMethod.POST)
+    @ResponseBody
+    public String addUser(@RequestParam("name") String name , @RequestParam("email") String email ,
+                          @RequestParam("phoneNumber") Integer phoneNumber , @RequestParam("toy") String[] toys) {
+        Client client = new Client();
+        client.setDate(date);
+        client.setEmail(email);
+        client.setName(name);
+        client.setPhoneNumber(phoneNumber);
+        client.setReservedToys(getListToys(toys));
+        clientRepository.save(client);
+        return "saved";
+    }
+
+    public List<Toy> getListToys(String[] toys) {
+        List<Toy> result = new ArrayList<>();
+        for (String s : toys) {
+            result.add(toyRepository.getToyByName(s));
+        }
+        return result;
+    }
+
 
     public boolean isDateInDatabase(String date){
         List<String> dates = clientService.dateFromDatabase();

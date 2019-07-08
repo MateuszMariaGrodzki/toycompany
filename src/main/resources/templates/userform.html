@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:href="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Toy company</title>
     <link rel="stylesheet" th:href="@{/cascade/starter-template.css}" />
 </head>
 
+
+<body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -27,22 +32,30 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<h2>aaa</h2>
 <div class="container">
-           <div class="toys container">
-            <div class="row">
-                <div th:each="category : ${categories}" class="col s6 14">
-                    <h1 th:text = "${category}"></h1>
-                    <a th:href="@{'/category/' + ${category}}" th:text="${category}">Category Name</a>
-
-                </div>
-            </div>
+    <h2>aa</h2>
+<form th:object="${user}" th:action="@{/reservation/useradd}" th:method="post">
+    <div class="form-group">
+        <label>Podaj imię</label>
+        <input required type="text" name = "name"
+               class="form-control input-small"
+               placeholder="Imię">
+        <label>Podaj email</label>
+        <input required type="text" name = "email"
+               class="form-control input-small"
+               placeholder="Email">
+        <label>Podaj numer telefonu</label>
+        <input required type="text" name = "phoneNumber"
+               class="form-control input-small"
+               placeholder="Numer telefonu">
+        <label>Wybierz zabawki które chcesz zarezerowować</label>
+        <div th:each =" toy : ${toys}" class="col s6 14">
+            <input type="checkbox" name="toy" th:text = " ${toy}"><br>
         </div>
-
-
-</div><!-- /.container -->
-
-
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg ">Wyślij dane</button>
+</form>
+</div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -52,10 +65,4 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
-
-
 </html>
-<!--
-<a th:href="@{'toy/' + ${toy.name}}">
-    <img th:src="@{'/toys/' + ${toy.name} + '.jpg'}">
--->
