@@ -32,38 +32,15 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
 <div class="container">
     <h2>aa</h2>
-<form th:object="${user}" th:action="@{/reservation/useradd}" th:method="post">
-    <div class="form-group">
-        <label>Podaj imię</label>
-        <input required type="text" name = "name"
-               class="form-control input-small"
-               placeholder="Imię">
-        <label>Podaj email</label>
-        <input required type="text" name = "email"
-               class="form-control input-small"
-               placeholder="Email">
-        <label>Podaj numer telefonu</label>
-        <input required type="text" name = "phoneNumber"
-               class="form-control input-small"
-               placeholder="Numer telefonu">
-        <label>Podaj ilość godzin na ktore chcesz wypożyczyć dmuchańce</label>
-        <input required type="text" name = hours
-            class="form-control input-small"
-            placeholder="Godziny">
-        <label>Podaj hasło</label>
-        <input required type="password" name = password
-               class="form-control input-small"
-               placeholder="Hasło">
-        <label>Wybierz zabawki które chcesz zarezerowować</label>
-        <div th:each =" toy : ${toys}" class="col s6 14">
-            <input type="checkbox" name="toy" th:text = " ${toy}"><br>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary btn-lg ">Wyślij dane</button>
-</form>
+    <h2>Rezerwacja została dokonana</h2>
+    <a href = "/home">Wróc do strony głównej</a>
 </div>
+</div><!-- /.container -->
+
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

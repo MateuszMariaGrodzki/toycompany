@@ -14,6 +14,9 @@ public class Client {
     private String email;
     private String date;
     private Integer phoneNumber;
+    private Integer hours;
+    private String password;
+    private String role= "client";
 
     @Column
     @ElementCollection(targetClass=Toy.class)
@@ -21,12 +24,14 @@ public class Client {
 
     public Client() {}
 
-    public Client(String name, String email, String date, Integer phoneNumber, List<Toy> reservedToys) {
+    public Client(String name, String email, String date, Integer phoneNumber, List<Toy> reservedToys , Integer hours , String password) {
         this.name = name;
         this.email = email;
         this.date = date;
         this.phoneNumber = phoneNumber;
         this.reservedToys = reservedToys;
+        this.hours = hours;
+        this.password = password;
     }
 
     public Integer getId(){
@@ -75,5 +80,21 @@ public class Client {
 
     public void setReservedToys(List<Toy> reservedToys) {
         this.reservedToys = reservedToys;
+    }
+
+    public Integer getHours() {
+        return hours;
+    }
+
+    public void setHours(Integer hours) {
+        this.hours = hours;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

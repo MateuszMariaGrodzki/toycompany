@@ -1,6 +1,7 @@
-package com.toycompany.demo.Model.Repository;
+package com.toycompany.demo.Model.Service;
 
 import com.toycompany.demo.Model.Client;
+import com.toycompany.demo.Model.Repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

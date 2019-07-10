@@ -2,7 +2,7 @@ package com.toycompany.demo.Controller;
 
 import com.toycompany.demo.Model.Client;
 import com.toycompany.demo.Model.Repository.ClientRepository;
-import com.toycompany.demo.Model.Repository.ClientService;
+import com.toycompany.demo.Model.Service.ClientService;
 import com.toycompany.demo.Model.Repository.ToyRepository;
 import com.toycompany.demo.Model.Toy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class ClientController {
         modelMap.put("message" , message);
         return "reservation";
     }
-
+    /*
     @RequestMapping("/add")
     @ResponseBody
     public String add(){
@@ -51,10 +50,12 @@ public class ClientController {
         clientRepository.save(client3);
         return "saved";
     }
+    */
+
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)
     public String testDate(@RequestParam("date") String date , RedirectAttributes redirectAttributes){
-        if(! isDateCorrect(date)) {
+        if(! isDateAvaible(date)) {
             redirectAttributes.addAttribute("message" , "Niepoprawna data");
             return "redirect:/reservation";
         }
@@ -75,20 +76,21 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/useradd" , method = RequestMethod.POST)
-    @ResponseBody
-    public String addUser(@RequestParam("name") String name , @RequestParam("email") String email ,
-                          @RequestParam("phoneNumber") Integer phoneNumber , @RequestParam("toy") String[] toys) {
+    public String addUser(@RequestParam("name") String name , @RequestParam("email") String email , @RequestParam("password") String password ,
+                          @RequestParam("phoneNumber") Integer phoneNumber , @RequestParam("toy") String[] toys, @RequestParam("hours") Integer hours) {
         Client client = new Client();
         client.setDate(date);
         client.setEmail(email);
         client.setName(name);
         client.setPhoneNumber(phoneNumber);
-        client.setReservedToys(getListToys(toys));
+        client.setReservedToys(getToyListFromArray(toys));
+        client.setHours(hours);
+        client.setPassword(password);
         clientRepository.save(client);
         return "saved";
     }
 
-    public List<Toy> getListToys(String[] toys) {
+    public List<Toy> getToyListFromArray(String[] toys) {
         List<Toy> result = new ArrayList<>();
         for (String s : toys) {
             result.add(toyRepository.getToyByName(s));
@@ -107,7 +109,7 @@ public class ClientController {
         return false;
     }
 
-    public boolean isDateCorrect(String date){
+    public boolean isDateAvaible(String date){
         List<String> possibleDates = new ArrayList<>();
         possibleDates.add("01/06/2019");
         possibleDates.add("02/06/2019");
