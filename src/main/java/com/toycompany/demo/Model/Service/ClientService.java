@@ -2,11 +2,11 @@ package com.toycompany.demo.Model.Service;
 
 import com.toycompany.demo.Model.Client;
 import com.toycompany.demo.Model.Repository.ClientRepository;
+import com.toycompany.demo.Model.Toy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -23,4 +23,59 @@ public class ClientService {
         }
         return dates;
     }
+
+    public boolean isDateInDatabase(String date){
+        List<String> dates = dateFromDatabase();
+        for(String string : dates ) {
+            if(string.equals(date)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getPasswordFromEmail(String email){
+        Iterable<Client> clients = clientRepository.findAll();
+        for(Client client : clients) {
+            if(client.getEmail().equals(email)){
+                return client.getPassword();
+            }
+        }
+        return "";
+    }
+
+    public boolean isEmailInDatabase(String email) {
+        Iterable<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            if(client.equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<String> getAllNames(){
+        List<String> result = new ArrayList<>();
+        Iterable<Client> clients = clientRepository.findAll();
+        for (Client client : clients){
+            result.add(client.getName());
+        }
+        return result;
+    }
+
+    public Client getClientByName(String name){
+        Iterable<Client> clients = clientRepository.findAll();
+        for(Client client : clients) {
+            if(client.getName().equals(name)){
+                return client;
+            }
+        }
+        return null;
+    }
+
+    public List<Toy> getToysByClientName(String name){
+        Client client = getClientByName(name);
+         return client.getReservedToys();
+    }
+
 }

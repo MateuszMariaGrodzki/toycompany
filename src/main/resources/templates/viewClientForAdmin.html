@@ -15,22 +15,10 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" th:href="@{/home}">Home</a>
+            <a class="navbar-brand" th:href="@{/home}">Log out</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/toys}">Sprawdź nasza ofertę</a></li>
-                <li class="active"><a th:href="@{/reservation?message=}">Dokonaj rezerwacji</a></li>
-                <li class="active"><a th:href="@{/contact}">Kontakt</a></li>
-                <li class="active"><a th:href="@{/login?message=}">Zaloguj się</a></li>
-            </ul>
+
         </div><!--/.nav-collapse -->
     </div>
 </nav>
@@ -38,8 +26,17 @@
 <div class="container">
 
     <div class="starter-template">
-    <h2>aaa</h2>
-        <h1>Strona firmy zajmujacej sie wypożyczaniem dmuchańców na imprezy grupowe.</h1>
+        <h2>aaa</h2>
+            <h3 th:text = "'Rezerwacji dokonał ' + ${client.getName()}"></h3>
+            <h3 th:text = "'Adres email rezerwującego ' + ${client.getEmail()}"></h3>
+            <h3 th:text = "'Numer telefonu rezerwującego ' + ${client.getPhoneNumber()}"></h3>
+            <h3 th:text = "'Na dzien ' + ${client.getDate()}"></h3>
+            <h3 th:text = "'W ilosći godzin równej ' + ${client.getHours()}"></h3>
+            <h3 th:text = "'Zamówione zabawki'"></h3>
+            <div th:each = "toy : ${toys}" >
+                <h3 th:text = " ${toy.getName()} "></h3>
+            </div>
+
     </div>
 
 </div><!-- /.container -->

@@ -15,22 +15,10 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" th:href="@{/home}">Home</a>
+            <a class="navbar-brand" th:href="@{/home}">Log out</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/toys}">Sprawdź nasza ofertę</a></li>
-                <li class="active"><a th:href="@{/reservation?message=}">Dokonaj rezerwacji</a></li>
-                <li class="active"><a th:href="@{/contact}">Kontakt</a></li>
-                <li class="active"><a th:href="@{/login?message=}">Zaloguj się</a></li>
-            </ul>
+
         </div><!--/.nav-collapse -->
     </div>
 </nav>
@@ -38,8 +26,13 @@
 <div class="container">
 
     <div class="starter-template">
-    <h2>aaa</h2>
-        <h1>Strona firmy zajmujacej sie wypożyczaniem dmuchańców na imprezy grupowe.</h1>
+        <h2>aaa</h2>
+        <h1>Zalogowany jako admin.</h1>
+        <h2>Dokonane rezerwacje:</h2>
+        <div th:each = "client : ${clients}" class="col s6 14">
+            <h3 th:text = "'Rezerwacji dokonał ' + ${client}"></h3>
+            <a th:href = "@{'/admin/admin/' + ${client}}">zobacz szczegoly</a>
+        </div>
     </div>
 
 </div><!-- /.container -->

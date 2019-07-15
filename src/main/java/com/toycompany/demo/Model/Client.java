@@ -1,6 +1,7 @@
 package com.toycompany.demo.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import com.toycompany.demo.Model.Toy;
 
@@ -15,12 +16,14 @@ public class Client {
     private String date;
     private Integer phoneNumber;
     private Integer hours;
+    //todo zmienic sposób zapisywania hasła.
     private String password;
-    private String role= "client";
 
-    @Column
+
     @ElementCollection(targetClass=Toy.class)
-    private List<Toy> reservedToys;
+    @OrderColumn
+    @CollectionTable(name ="toys" , joinColumns=@JoinColumn(name="toy_id"))
+    private List<Toy> reservedToys = new ArrayList<>();
 
     public Client() {}
 

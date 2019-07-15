@@ -58,7 +58,7 @@
                placeholder="Hasło">
         <label>Wybierz zabawki które chcesz zarezerowować</label>
         <div th:each =" toy : ${toys}" class="col s6 14">
-            <input type="checkbox" name="toy" th:text = " ${toy}"><br>
+            <input type="checkbox" name="toy" th:value = "${toy}" th:text = " ${toy}"><br>
         </div>
     </div>
     <button type="submit" class="btn btn-primary btn-lg ">Wyślij dane</button>

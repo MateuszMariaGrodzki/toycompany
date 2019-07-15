@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class ClientController {
             return "redirect:/reservation";
         }
 
-        if(isDateInDatabase(date)) {
+        if(clientService.isDateInDatabase(date)) {
             redirectAttributes.addAttribute("message" , "Termin został już zarezerwowany przez inną osobę");
             return "redirect:/reservation";
         }
@@ -78,6 +79,7 @@ public class ClientController {
     @RequestMapping(value = "/useradd" , method = RequestMethod.POST)
     public String addUser(@RequestParam("name") String name , @RequestParam("email") String email , @RequestParam("password") String password ,
                           @RequestParam("phoneNumber") Integer phoneNumber , @RequestParam("toy") String[] toys, @RequestParam("hours") Integer hours) {
+        //todo uzyc konstruktora zamiast seterow (rozważyć ich usuniecie)
         Client client = new Client();
         client.setDate(date);
         client.setEmail(email);
@@ -99,15 +101,6 @@ public class ClientController {
     }
 
 
-    public boolean isDateInDatabase(String date){
-        List<String> dates = clientService.dateFromDatabase();
-        for(String string : dates ) {
-            if(string.equals(date)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public boolean isDateAvaible(String date){
         List<String> possibleDates = new ArrayList<>();
