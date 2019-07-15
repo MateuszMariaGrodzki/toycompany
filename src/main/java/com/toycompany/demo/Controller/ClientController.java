@@ -1,11 +1,13 @@
 package com.toycompany.demo.Controller;
 
+import com.toycompany.demo.Configuration.WebMvcConfig;
 import com.toycompany.demo.Model.Client;
 import com.toycompany.demo.Model.Repository.ClientRepository;
 import com.toycompany.demo.Model.Service.ClientService;
 import com.toycompany.demo.Model.Repository.ToyRepository;
 import com.toycompany.demo.Model.Toy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,9 @@ public class ClientController {
 
     @Autowired
     ToyRepository toyRepository;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping("")
     public String beginReservation(ModelMap modelMap, @RequestParam String message){
@@ -77,17 +82,13 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/useradd" , method = RequestMethod.POST)
-    public String addUser(@RequestParam("name") String name , @RequestParam("email") String email , @RequestParam("password") String password ,
-                          @RequestParam("phoneNumber") Integer phoneNumber , @RequestParam("toy") String[] toys, @RequestParam("hours") Integer hours) {
-        //todo uzyc konstruktora zamiast seterow (rozważyć ich usuniecie)
-        Client client = new Client();
-        client.setDate(date);
-        client.setEmail(email);
-        client.setName(name);
-        client.setPhoneNumber(phoneNumber);
-        client.setReservedToys(getToyListFromArray(toys));
-        client.setHours(hours);
-        client.setPassword(password);
+    public String addUser(@RequestParam("name") String name,
+                          @RequestParam("email") String email,
+                          @RequestParam("password") String password,
+                          @RequestParam("phoneNumber") Integer phoneNumber,
+                          @RequestParam("toy") String[] toys,
+                          @RequestParam("hours") Integer hours){
+        Client client = new Client(name , email , date , phoneNumber , getToyListFromArray(toys) , hours , bCryptPasswordEncoder.encode(password));
         clientRepository.save(client);
         return "saved";
     }

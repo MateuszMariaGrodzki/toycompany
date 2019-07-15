@@ -16,7 +16,6 @@ public class Client {
     private String date;
     private Integer phoneNumber;
     private Integer hours;
-    //todo zmienic sposób zapisywania hasła.
     private String password;
 
 

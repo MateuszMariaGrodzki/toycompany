@@ -34,7 +34,7 @@ public class ClientService {
         return false;
     }
 
-    public String getPasswordFromEmail(String email){
+    public String getPasswordByEmail(String email){
         Iterable<Client> clients = clientRepository.findAll();
         for(Client client : clients) {
             if(client.getEmail().equals(email)){
@@ -47,7 +47,7 @@ public class ClientService {
     public boolean isEmailInDatabase(String email) {
         Iterable<Client> clients = clientRepository.findAll();
         for (Client client : clients) {
-            if(client.equals(email)) {
+            if(client.getEmail().equals(email)) {
                 return true;
             }
         }
@@ -76,6 +76,16 @@ public class ClientService {
     public List<Toy> getToysByClientName(String name){
         Client client = getClientByName(name);
          return client.getReservedToys();
+    }
+
+    public String getNameByEmail(String email) {
+        Iterable<Client> clients = clientRepository.findAll();
+        for(Client client : clients) {
+            if(client.getEmail().equals(email)){
+                return client.getName();
+            }
+        }
+        return null;
     }
 
 }
