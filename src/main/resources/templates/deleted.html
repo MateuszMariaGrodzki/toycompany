@@ -27,18 +27,8 @@
 
     <div class="starter-template">
         <h2>aaa</h2>
-        <h3 th:text = "'Rezerwacji dokonał: ' + ${client.getName()}"></h3>
-        <h3 th:text = "'Adres email rezerwującego: ' + ${client.getEmail()}"></h3>
-        <h3 th:text = "'Numer telefonu rezerwującego: ' + ${client.getPhoneNumber()}"></h3>
-        <h3 th:text = "'Na dzien: ' + ${client.getDate()}"></h3>
-        <h3 th:text = "'W ilosći godzin równej: ' + ${client.getHours()}"></h3>
-        <h3 th:text = "'Zamówione zabawki:'"></h3>
-        <div th:each = "toy : ${toys}" >
-            <h3 th:text = " ${toy.getName()} "></h3>
-        </div>
-
-
-    </div>
+        <h2 th:text = "'Rezerwacja zostala usunieta'"></h2>
+        <a href = "/home">Wróc do strony głównej</a>
 
 </div><!-- /.container -->
 

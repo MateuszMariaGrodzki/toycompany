@@ -27,16 +27,14 @@
 
     <div class="starter-template">
         <h2>aaa</h2>
-        <h3 th:text = "'Rezerwacji dokonał: ' + ${client.getName()}"></h3>
-        <h3 th:text = "'Adres email rezerwującego: ' + ${client.getEmail()}"></h3>
-        <h3 th:text = "'Numer telefonu rezerwującego: ' + ${client.getPhoneNumber()}"></h3>
-        <h3 th:text = "'Na dzien: ' + ${client.getDate()}"></h3>
-        <h3 th:text = "'W ilosći godzin równej: ' + ${client.getHours()}"></h3>
+        <h2 th:text = "'Witaj ' + ${client.getName()}"></h2>
+        <h2 th:text = "'Dokonales rezerwacji na dzien ' + ${client.getDate()} + ' na ilosc godzin ' + ${client.getHours()}"></h2>
         <h3 th:text = "'Zamówione zabawki:'"></h3>
         <div th:each = "toy : ${toys}" >
             <h3 th:text = " ${toy.getName()} "></h3>
         </div>
-
+        <h2 th:text = "'Calkowity koszty wypozyczenia wynosi ' + ${hirecost} + ' zł'"></h2>
+        <a th:href = "@{'/login/' + ${client.getName()}}">Cofnij</a>
 
     </div>
 

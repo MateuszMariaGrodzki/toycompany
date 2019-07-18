@@ -88,4 +88,9 @@ public class ClientService {
         return null;
     }
 
+    public void deleteClientByName(String name){
+        Client client = getClientByName(name);
+        clientRepository.delete(client);
+    }
+
 }

@@ -57,4 +57,12 @@ public class ToyRepository {
         }
         return null;
     }
+
+    public int calculatePricePerHours(List<Toy> toys){
+        int price = 0;
+        for(Toy toy : toys) {
+            price += toy.getPricePerHour();
+        }
+        return price;
+    }
 }
