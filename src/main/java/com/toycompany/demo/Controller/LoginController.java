@@ -28,7 +28,9 @@ public class LoginController {
     }
 
     @RequestMapping("/check")
-    public String check(@RequestParam("email") String email , @RequestParam("password") String password, RedirectAttributes redirectAttributes) {
+    public String check(@RequestParam("email") String email ,
+                        @RequestParam("password") String password,
+                        RedirectAttributes redirectAttributes) {
         if(email.equals("admin") && password.equals("admin")) {
             return "redirect:/admin/" + password;
         }

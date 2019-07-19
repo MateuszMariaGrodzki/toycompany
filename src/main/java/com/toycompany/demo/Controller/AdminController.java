@@ -20,16 +20,16 @@ public class AdminController {
 
     @RequestMapping("")
     public String adminHome(ModelMap modelMap){
-        List<String> clientNames = clientService.getAllNames();
-        modelMap.put("clients" , clientNames);
+        List<String> clientEmails = clientService.getAllEmails();
+        modelMap.put("clientsEmails" , clientEmails);
         return "adminHome";
     }
 
-    @RequestMapping("/{name}")
-    public String showUserDetails(@PathVariable String name, ModelMap modelMap){
-        Client client = clientService.getClientByName(name);
+    @RequestMapping("/{email}")
+    public String showUserDetails(@PathVariable String email, ModelMap modelMap){
+        Client client = clientService.getClientByEmail(email);
         modelMap.put("client" , client);
-        List<Toy> toys = clientService.getToysByClientName(name);
+        List<Toy> toys = clientService.getToysByClientEmail(email);
         modelMap.put("toys" , toys);
         return "viewClientForAdmin";
     }

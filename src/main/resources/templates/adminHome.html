@@ -29,8 +29,8 @@
         <h2>aaa</h2>
         <h1>Zalogowany jako admin.</h1>
         <h2>Dokonane rezerwacje:</h2>
-        <div th:each = "client : ${clients}" class="col s6 14">
-            <h3 th:text = "'Rezerwacji dokonał ' + ${client}"></h3>
+        <div th:each = "client : ${clientsEmails}" class="col s6 14">
+            <h3 th:text = "'Rezerwacji dokonał ' + ${@clientService.getNameByEmail(client)}"></h3>
             <a th:href = "@{'/admin/admin/' + ${client}}">zobacz szczegoly</a>
         </div>
     </div>

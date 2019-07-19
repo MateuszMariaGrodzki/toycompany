@@ -71,13 +71,14 @@ public class ClientController {
             return "redirect:/reservation";
         }
         this.date = date;
-        return "redirect:/reservation/user";
+        return "redirect:/reservation/user?message=";
     }
 
     @RequestMapping(value = "/user" , method = RequestMethod.GET)
-    public String UserData(ModelMap modelMap){
+    public String UserData(ModelMap modelMap, @RequestParam String message){
         List<String> toyNames = toyRepository.getToysNames();
         modelMap.put("toys" , toyNames);
+        modelMap.put("message" , message);
         return "userform";
     }
 
@@ -87,7 +88,12 @@ public class ClientController {
                           @RequestParam("password") String password,
                           @RequestParam("phoneNumber") Integer phoneNumber,
                           @RequestParam("toy") String[] toys,
-                          @RequestParam("hours") Integer hours){
+                          @RequestParam("hours") Integer hours,
+                          RedirectAttributes redirectAttributes){
+        if(clientService.isEmailInDatabase(email)) {
+            redirectAttributes.addAttribute("message" , "Podany email istnieje juz w bazie danych");
+            return "redirect:/reservation/user";
+        }
         Client client = new Client(name , email , date , phoneNumber , getToyListFromArray(toys) , hours , bCryptPasswordEncoder.encode(password));
         clientRepository.save(client);
         return "saved";

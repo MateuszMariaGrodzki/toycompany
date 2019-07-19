@@ -88,6 +88,46 @@ public class ClientService {
         return null;
     }
 
+    public List<String> getAllEmails(){
+        Iterable<Client> clients = clientRepository.findAll();
+        List<String> result = new ArrayList<>();
+        for (Client client : clients) {
+            result.add(client.getEmail());
+        }
+        return result;
+    }
+
+    public Client getClientByEmail(String email) {
+        Iterable<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            if (client.getEmail().equals(email)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    public List<Toy> getToysByClientEmail(String email){
+        Client client = getClientByEmail(email);
+        return client.getReservedToys();
+    }
+
+    public Client getClientByDate(String date) {
+        Iterable<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            if (client.getDate().equals(date)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    public List<Toy> getReservedToysByDate(String date) {
+        Client client = getClientByDate(date);
+        return client.getReservedToys();
+    }
+    
+
     public void deleteClientByName(String name){
         Client client = getClientByName(name);
         clientRepository.delete(client);
