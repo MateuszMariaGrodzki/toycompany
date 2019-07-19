@@ -3,6 +3,7 @@ package com.toycompany.demo.Controller;
 import com.toycompany.demo.Model.Client;
 import com.toycompany.demo.Model.Repository.ToyRepository;
 import com.toycompany.demo.Model.Service.ClientService;
+import com.toycompany.demo.Model.Service.CurrencyService;
 import com.toycompany.demo.Model.Toy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Controller
@@ -22,6 +24,9 @@ public class ClientLoginController {
 
     @Autowired
     ToyRepository toyRepository;
+
+    @Autowired
+    CurrencyService currencyService;
 
     @RequestMapping("/{name}")
     public String showOptionsForClient(@PathVariable String name, ModelMap modelMap){
@@ -37,6 +42,12 @@ public class ClientLoginController {
         modelMap.put("toys" , toys);
         int hireCost = toyRepository.calculatePricePerHours(toys) * client.getHours();
         modelMap.put("hirecost" , hireCost);
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        String hireCostinDolars = String.format("%.2f" ,hireCost * ( 1 / currencyService.getCurrency("usd").getRates().get(0).getBid()));
+        modelMap.put("usd" , hireCostinDolars);
+        String hireCostInEuro = String.format("%.2f", hireCost * (1 / currencyService.getCurrency("eur").getRates().get(0).getBid()));
+        modelMap.put("eur" , hireCostInEuro);
         return "viewClientForClient";
     }
 
