@@ -1,6 +1,5 @@
 package com.toycompany.demo.Controller;
 
-import com.toycompany.demo.Configuration.WebMvcConfig;
 import com.toycompany.demo.Model.Client;
 import com.toycompany.demo.Model.Repository.ClientRepository;
 import com.toycompany.demo.Model.Service.ClientService;
@@ -13,7 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -95,6 +93,7 @@ public class ClientController {
             return "redirect:/reservation/user";
         }
         Client client = new Client(name , email , date , phoneNumber , getToyListFromArray(toys) , hours , bCryptPasswordEncoder.encode(password));
+        client.setActive(1);
         clientRepository.save(client);
         return "saved";
     }

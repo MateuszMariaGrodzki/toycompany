@@ -35,22 +35,16 @@
 <div th:if="${param.logout}">
     Zostałeś wylogowany.
 </div>
-<form th:action="@{/login/check}" method="post">
+<form th:action="@{/logi}" method="post">
     <div class="form-group">
         <label>Podaj email</label>
         <input required type="text" name = "email"
                class="form-control input-small"
                placeholder="email">
     </div>
-    <div class="form-group">
-        <label>Podaj hasło</label>
-        <input required type="password" name = "password"
-               class="form-control input-small"
-               placeholder="hasło">
-    </div>
-    <div><input type="submit" value="Sign In"/></div>
+        <div><input type="submit" value="Sign In"/></div>
 </form>
-    <h1 th:text = "${message}" style = "font-size:500%;color:red"></h1>
+
 </div>
 <!-- Bootstrap core JavaScript
 ================================================== -->

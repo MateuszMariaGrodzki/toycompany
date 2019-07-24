@@ -4,13 +4,16 @@ import com.toycompany.demo.Model.Client;
 import com.toycompany.demo.Model.Repository.ClientRepository;
 import com.toycompany.demo.Model.Toy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ClientService {
+public class ClientService{
 
     @Autowired
     ClientRepository clientRepository;

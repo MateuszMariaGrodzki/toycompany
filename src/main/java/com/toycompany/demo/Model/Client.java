@@ -3,6 +3,8 @@ package com.toycompany.demo.Model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import com.toycompany.demo.Model.Toy;
 
 @Entity
@@ -17,7 +19,7 @@ public class Client {
     private Integer phoneNumber;
     private Integer hours;
     private String password;
-
+    private Integer active;
 
     @ElementCollection(targetClass=Toy.class)
     @OrderColumn
@@ -99,4 +101,9 @@ public class Client {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Integer getActive() { return active;}
+
+    public void setActive(Integer active) {this.active = active; }
+
 }

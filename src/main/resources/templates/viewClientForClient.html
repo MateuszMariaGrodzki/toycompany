@@ -15,7 +15,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" th:href="@{/home}">Log out</a>
+            <a class="navbar-brand" th:href="@{/logout}">Log out</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
 
@@ -36,7 +36,7 @@
         <h2 th:text = "'Calkowity koszty wypozyczenia wynosi ' + ${hirecost} + ' zł'"></h2>
         <h2 th:text = "'Calkowity koszty wypozyczenia wynosi ' + ${usd} + ' $'"></h2>
         <h2 th:text = "'Calkowity koszty wypozyczenia wynosi ' + ${eur} + ' €'"></h2>
-        <a th:href = "@{'/login/' + ${client.getName()}}">Cofnij</a>
+        <a th:href = "@{'/login/' + ${client.getEmail()}}">Cofnij</a>
 
     </div>
 

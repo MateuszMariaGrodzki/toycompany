@@ -28,17 +28,17 @@ public class ClientLoginController {
     @Autowired
     CurrencyService currencyService;
 
-    @RequestMapping("/{name}")
-    public String showOptionsForClient(@PathVariable String name, ModelMap modelMap){
-        Client client = clientService.getClientByName(name);
+    @RequestMapping("/{email}")
+    public String showOptionsForClient(@PathVariable String email, ModelMap modelMap){
+        Client client = clientService.getClientByEmail(email);
         modelMap.put("client" , client);
         return "clientOptions";
     }
-    @RequestMapping("/{name}/showreservation")
-    public String showReservationForClient(@PathVariable String name, ModelMap modelMap) {
-        Client client = clientService.getClientByName(name);
+    @RequestMapping("/{email}/showreservation")
+    public String showReservationForClient(@PathVariable String email, ModelMap modelMap) {
+        Client client = clientService.getClientByEmail(email);
         modelMap.put("client" , client);
-        List<Toy> toys = clientService.getToysByClientName(name);
+        List<Toy> toys = clientService.getToysByClientEmail(email);
         modelMap.put("toys" , toys);
         int hireCost = toyRepository.calculatePricePerHours(toys) * client.getHours();
         modelMap.put("hirecost" , hireCost);

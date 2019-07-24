@@ -14,7 +14,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/admin")
 public class AdminController {
-
     @Autowired
     ClientService clientService;
 
@@ -33,4 +32,5 @@ public class AdminController {
         modelMap.put("toys" , toys);
         return "viewClientForAdmin";
     }
+    
 }
